@@ -1,0 +1,8 @@
+# Per-device Obsidian UI state: changes constantly and would conflict between phone and laptop
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+# OS noise
+.DS_Store
+Thumbs.db

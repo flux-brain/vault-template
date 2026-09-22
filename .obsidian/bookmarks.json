@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "type": "file", "path": "index.md" },
+    { "type": "folder", "path": "briefings/daily" },
+    { "type": "folder", "path": "wiki/projects" }
+  ]
+}
