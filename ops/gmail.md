@@ -24,3 +24,8 @@ captures or memory make the project obvious, add one dated `## Log` line there s
 processed (subject unknown, link); otherwise touch no page. In both cases ask the owner in a `notify/...-question-...`
 file whether the email matters: he can fix the cause and label the conversation `📁 Vault` again, and it is
 retried from scratch. In the filed summary: `Gmail: unprocessed conversation`.
+
+**`project:` and `via: tasks` in the frontmatter.** The owner dragged this email into the Google Tasks list of that
+project instead of labelling it. File it under that project (no guessing), with its attachments as for any Gmail
+capture; a matching `new action` line arrives in the same run's Tasks capture and names this file.
+
