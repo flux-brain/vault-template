@@ -16,3 +16,10 @@ the owner's Tasks edits back as captures. One kind:
  `new action: X` → add `- [ ] X`; `new action, already done: X` → add `- [x] X`; `removed: X` →
  delete that line and note it in the log; `reworded: A → B` → replace A with B. Add a short dated
  `## Log` line ("Tasks: done X") and set `updated:`. No `notify/` unless a line is ambiguous.
+
+**An email dragged into the list.** A `new action` line may end with `(email filed as inbox/<...>-gmail-<id>.md)`:
+the owner dragged an email from Gmail into the project's Tasks list, and the server filed that conversation as a
+separate capture carrying `project: <slug>` and `via: tasks` (see `ops/gmail.md`). Add the action as usual (the task
+stays in the list), and file the email capture under this same project without guessing; on the page, link the
+action to the email's capture or attachment text where that helps.
+
