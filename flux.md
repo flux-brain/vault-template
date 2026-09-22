@@ -23,7 +23,8 @@ edit it when something changes. Keep it free of secrets: it is committed to the 
 ## Optional modules (on / off)
 
 - Memory mirror (`memory/`, memory proposals, action ids in memory): `off`
-- Google Keep checklists (`ops/keep.md`): `off`
+- Google Tasks checklists (`ops/tasks.md`): `off`
+- Google Keep checklists (`ops/keep.md`): `off` (not shipped; Tasks replaces it)
 - Gmail feed (`ops/gmail.md`): `off`
 
 When a module is off, its `ops/` file may be deleted and Claude ignores the matching rules.
