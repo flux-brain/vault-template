@@ -64,7 +64,7 @@ posts the run link to `#flux-log` so you can watch Claude work.
   from Claude @mention you. Answer by replying in the channel; the answer comes back through the inbox.
 - **Reviews:** a daily digest and, on Sundays, a weekly project review, posted to `#flux`.
 - **Optional modules** (each documented in the server repository): a read-only mirror of your Claude
-  Code memory into `memory/`, Google Keep checklists for every project page, a Gmail label feed.
+  Code memory into `memory/`, a Google Tasks list for every active project page, a Gmail label feed.
 
 ## Privacy by design
 

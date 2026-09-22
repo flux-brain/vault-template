@@ -11,7 +11,7 @@ notices.
 ## Owner settings
 
 Read `flux.md` at the repository root first: it names the owner, the time zone, the writing languages,
-the Discord channel names and which optional modules are on (memory mirror, Google Keep, Gmail). Every
+the Discord channel names and which optional modules are on (memory mirror, Google Tasks, Gmail). Every
 rule below that says "the owner" means the person named there.
 
 ## Scope
@@ -177,8 +177,8 @@ changed within the last hour, leave it alone: the owner may still be typing on t
 non-empty captures ("test", "new note") are NOT empty; file them normally.
 
 **Kinds with their own instructions.** Before filing a capture of one of these kinds, read its file
-once per run: `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`; `source: memory` ->
-`ops/memory-reconcile.md` (each exists only when its module is on). Discord captures (they carry
+once per run: `source: tasks` -> `ops/tasks.md`; `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`;
+`source: memory` -> `ops/memory-reconcile.md` (each exists only when its module is on). Discord captures (they carry
 `message_id:`) and Obsidian notes (no `source:`) need only this section.
 
 For each file in `inbox/` (ignore `.gitkeep`), oldest first:
@@ -221,7 +221,7 @@ uses it in both directions:
 **Captures from the memory store (`source: memory`, `kind: reconcile`)** are filed by the rules in
 `ops/memory-reconcile.md`. **Never write a memory proposal for changes made from these captures.**
 
-**Proposing memory updates (`memory-proposals/`).** When a capture from the owner (`source: keep`, a
+**Proposing memory updates (`memory-proposals/`).** When a capture from the owner (`source: tasks` or `source: keep`, a
 Discord capture, or an Obsidian note with no `source:`) changes an action on a page whose `memory:` list
 is not empty (ticks, reopens, adds, removes or rewords it), ALSO write ONE file per page per run,
 `memory-proposals/YYYY-MM-DDTHHMM-<slug>.md` (real current UTC time), containing only this frontmatter:
@@ -229,7 +229,7 @@ is not empty (ticks, reopens, adds, removes or rewords it), ALSO write ONE file 
 ```yaml
 ---
 page: <slug>
-source: keep | discord | obsidian
+source: tasks | keep | discord | obsidian
 capture: raw/captures/YYYY/MM/<capture file>
 memory: [<the page's memory: list>]
 changes:
@@ -250,14 +250,13 @@ server refuses the automatic edit and posts it for review instead. A tick means 
 list", not "the thing happened", and only the owner can tell those apart. You keep ticking the page as
 usual; this rule only governs what the server writes into memory.
 
-Because the Keep module reads `## Next actions`, keep that section as plain checkbox lines, ONE line
-per action (no hard wraps, no nested prose), and keep `status:` and `updated:` in the frontmatter
-current: Keep shows them on the checklist and pins `active`, unpins `paused` and archives `done`
-projects.
+Because the Tasks and Keep modules read `## Next actions`, keep that section as plain checkbox lines, ONE
+line per action (no hard wraps, no nested prose), and keep `status:` in the frontmatter current: the
+Tasks module syncs `active` projects and marks `paused` and `done` lists by name.
 
 **Stable action ids.** Every line in `## Next actions` ends with a four-character Obsidian block id,
-like `^a1b2`. It is that action's identity everywhere: the Keep sync maps its checklist item by it, and
-the server strikes the matching memory line by it. Rules, most important first:
+like `^a1b2`. It is that action's identity everywhere: the Tasks module maps its task by it (the id sits in the
+task's notes), the Keep sync maps its checklist item by it, and the server strikes the matching memory line by it. Rules, most important first:
 - NEVER change, remove or reuse an id. **Rewording an action keeps its id**; that is the whole point.
   Ticking, unticking and moving a line keep it too.
 - A new action YOU add gets a new id: four characters from `a-z0-9`, not already used on that page.
@@ -267,7 +266,7 @@ the server strikes the matching memory line by it. Rules, most important first:
   sessions and the server do), so when you add an action from a memory capture, just mint the page id
   and name it in the run's filed summary; a session carries it to the memory line.
 
-Without the memory module, action ids are still used (they keep Keep items stable) but the `memory:`
+Without the memory module, action ids are still used (they keep Tasks and Keep items stable) but the `memory:`
 field stays empty and no proposals are written.
 
 ### 2. Daily digest
