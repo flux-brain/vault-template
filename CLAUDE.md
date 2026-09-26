@@ -149,7 +149,7 @@ overlapping and get answers to the owner sooner.
    one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
    check again, for at most 10 minutes) so the briefing is not skipped. A marker 10 minutes old or more is stale:
    overwrite it.
-4. **Marker:** write `.run/active` containing one line `started: <current UTC time, YYYY-MM-DDTHH:MM:SSZ>`, then
+4. **Marker:** run `mkdir -p .run` first (the folder does not exist while no run is active, so writing the file alone fails), then write `.run/active` containing one line `started: <current UTC time, YYYY-MM-DDTHH:MM:SSZ>`, then
    `git add .run/active && git commit -q -m "run: start" && git push -q origin main`. If that push is rejected, run
    `git fetch origin main && git reset --hard origin/main` (safe: nothing else has been done yet) and go back to step 3.
 5. **Start message:** a run started by the relay receives a line `Inbox now holds: ...` listing each capture with its
