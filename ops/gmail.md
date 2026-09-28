@@ -29,3 +29,11 @@ retried from scratch. In the filed summary: `Gmail: unprocessed conversation`.
 project instead of labelling it. File it under that project (no guessing), with its attachments as for any Gmail
 capture; a matching `new action` line arrives in the same run's Tasks capture and names this file.
 
+**`source: triage`, `want: reply-draft` (the ✍️ button).** A server module posts new emails that probably matter in
+`#flux` with two buttons; the owner tapped ✍️ on one. The same conversation arrives as an ordinary `source: gmail`
+capture with the same `thread_id` (labelled at the same moment, filed within a minute). File the Gmail capture as
+usual, then write a reply draft to its latest message in `notify/` like any requested draft (complete, copy-ready,
+in the language of the email, no en or em dashes). If that Gmail capture is not in `inbox/` or `raw/captures/` yet,
+leave the triage capture in `inbox/` for the next run. Never reply to anyone yourself. A ✅ tap needs nothing from
+you: it only produces the ordinary Gmail capture.
+

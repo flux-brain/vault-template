@@ -196,7 +196,7 @@ changed within the last hour, leave it alone: the owner may still be typing on t
 non-empty captures ("test", "new note") are NOT empty; file them normally.
 
 **Kinds with their own instructions.** Before filing a capture of one of these kinds, read its file
-once per run: `source: tasks` -> `ops/tasks.md`; `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`; `source: drive` -> `ops/drive.md`;
+once per run: `source: tasks` -> `ops/tasks.md`; `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`; `source: drive` -> `ops/drive.md`; `source: triage` -> `ops/gmail.md` (last section);
 `source: memory` -> `ops/memory-reconcile.md` (each exists only when its module is on). Discord captures (they carry
 `message_id:`) and Obsidian notes (no `source:`) need only this section.
 
