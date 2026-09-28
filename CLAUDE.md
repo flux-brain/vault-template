@@ -72,6 +72,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `raw/captures/YYYY/MM/` | Claude moves, never edits | Processed captures, immutable source of truth |
 | `raw/attachments/<file>.md` | relays | Text of each attachment (PDF/image OCR, Office, email, audio transcript); the original file stays in the owner's cloud storage |
 | `calendar/YYYY-MM-DD.md` | server Calendar module, READ-ONLY, optional | One file per day, today and the week ahead; a day that has ended stays as it stood. Read it, never edit, move or delete it |
+| `followups/waiting.md` | server follow-up module, READ-ONLY | the owner's sent emails still waiting for an answer, oldest first (recipients, subject, Gmail link). Read it, never edit it |
 | `memory/` | server mirror, READ-ONLY, optional | The owner's memory store (see above) |
 | `memory-proposals/` | Claude writes, server reads, optional | Proposed memory updates from the owner's own page edits (see "Keeping pages and memory in step") |
 | `wiki/projects/` | Claude | One page per project, with status and next actions |

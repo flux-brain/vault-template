@@ -10,6 +10,9 @@ Write `briefings/daily/YYYY-MM-DD.md`, short and factual, max ~30 lines:
 - Open next actions across active projects, overdue first, EXCLUDING `#session` ones (they have their own block).
 - Open `> [!question]` markers still waiting for the owner (never `[!done]` ones; if a question's answer
   already sits on the page, fix the callout per CLAUDE.md "Answered questions" instead of listing it).
+- **Waiting on** (only if `followups/waiting.md` lists anything): one line per entry, oldest first, `N days`,
+  who and the subject; add the project page link when the recipient or the subject clearly matches a page. At most
+  8 lines, then `+N more`. It is the owner's own sent mail: never draft a chaser unless asked.
 - **Due soon:** open actions whose `📅` date is past or within 14 days, soonest first, one line each: `in N days`
   (or `OVERDUE by N days`), the action, its page link. Omit the block when there are none. Then, at most once a day,
   when any of them is due within 7 days or overdue, write ONE `notify/YYYY-MM-DDTHHMM-question-due-soon.md` (it pings
