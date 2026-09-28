@@ -166,6 +166,11 @@ overlapping and get answers to the owner sooner.
    If that `notify/` file already exists, an earlier run already answered: do not write it again.
 7. **End:** the run's last commit also removes the marker (`git rm -q .run/active`). If there is nothing else to
    commit, commit `run: end` with only that. Remove it even when a step failed.
+   **That commit is the run's LAST.** Check the pages, `index.md`, `log.md` and the `-filed.md` summary BEFORE
+   making it. If you find anything to change after it was pushed, put the marker back first (step 4: write
+   `.run/active`, push `run: start`), then make the change in a commit that removes the marker again. A second
+   thought pushed without the marker is the one way runs still overlap. Never edit a `notify/` file that was already
+   pushed (the relay posted it once and will not post the edit): write a new one.
 
 ## Operations
 
