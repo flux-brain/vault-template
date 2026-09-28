@@ -128,6 +128,10 @@ memory: []         # projects, memory module only: memory/ files this page's act
   nothing is in storage or `raw/attachments/`, the file is still on the Discord message. Treat it like a
   file without text; if the content matters, ask the owner in a `notify/...-question-...` file to
   re-post it.
+- Due dates: an action with a deadline carries `📅 YYYY-MM-DD` just before its `#session` tag and `^id`
+  (`- [ ] Send the AGM notice 📅 2026-10-01 ^a1b2`; Obsidian's Tasks format). Set it only from a date a capture, a
+  document or `memory/` states, never a guess; when the deadline moves, change it and say so in the page log. A
+  ticked action keeps its date. The daily digest counts down to these dates (`ops/daily-digest.md`).
 - Links: a Discord capture with a Google Docs, Sheets, Slides or Drive link has a `## Links` section written by the
   relay: the file's name, type, Drive folder and last edit (the folder name is often the project), and by default a
   link to its text in `raw/attachments/<file>.md`, like an attachment. The text is a copy made when the owner posted: the
