@@ -1,6 +1,8 @@
 # Daily digest
 
-Write `briefings/daily/YYYY-MM-DD.md`, short and factual, max ~30 lines:
+Write `briefings/daily/YYYY-MM-DD.md`, short and factual, max ~45 lines. Over that, shorten in this order: the
+"captured and filed" list (group by page), then open next actions (overdue and the next 5 only), then open
+questions; never drop Today, Due soon, Waiting on or Needs a session:
 
 - **Today** (only if `calendar/<today>.md` exists): the day's events in time order, one line each. After an event,
   add at most one line of prep when a person or project page matches it (an attendee or a name in the title):
