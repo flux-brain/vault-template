@@ -128,6 +128,12 @@ memory: []         # projects, memory module only: memory/ files this page's act
   nothing is in storage or `raw/attachments/`, the file is still on the Discord message. Treat it like a
   file without text; if the content matters, ask the owner in a `notify/...-question-...` file to
   re-post it.
+- Links: a Discord capture with a Google Docs, Sheets, Slides or Drive link has a `## Links` section written by the
+  relay: the file's name, type, Drive folder and last edit (the folder name is often the project), and by default a
+  link to its text in `raw/attachments/<file>.md`, like an attachment. The text is a copy made when the owner posted: the
+  Doc may have changed since, so date what you quote from it. `-text` in the message means the owner wanted the details
+  only: do not ask for the text. A line reading `not accessible with the Drive token` means only the URL is known:
+  file it by the message's own words and ask the owner only if the content matters. Never try to open a link yourself.
 - Requests in a capture ("draft a message", "summarise this"): do the work and save the result in
   the relevant wiki page. When the result is something the owner will send or reuse (a message, email,
   post, reply), ALSO put the COMPLETE text in its own `notify/` file as plain text (no `>` quoting,
