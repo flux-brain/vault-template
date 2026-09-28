@@ -82,6 +82,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `briefings/weekly/YYYY-Www.md` | Claude | Weekly project review (the relay posts it to Discord) |
 | `notify/` | Claude | Short messages for the owner (the relay posts them to Discord) |
 | `index.md` | Claude | Router: one line per wiki page, grouped by folder |
+| `session.md` | Claude | Queue of open `#session` actions across all pages, rebuilt from the pages (see Page conventions) |
 | `log.md` | Claude | Append-only operations log, newest at the bottom |
 | `templates/` | the owner + Claude | Page templates |
 | `ops/` | the owner + Claude | Instructions for one kind of capture or run (read when that kind is present) |
@@ -220,6 +221,12 @@ cannot do it. Write it once as a normal next action with the tag `#session` just
 (`- [ ] Find the official texts and put them in folder X #session ^a1b2`). The owner's interactive sessions
 work that list and report back through an inbox capture; when that capture arrives, tick the action and file
 the result. The daily digest lists open `#session` actions in one block (see `ops/daily-digest.md`).
+**`session.md` (the session queue).** A top-level file listing every open `#session` action across all pages,
+so a session reads one file. Whenever a run adds, rewords or ticks a `#session` action, rebuild it from the
+pages (not by hand-editing lines): one `## <page title>` heading per page with open ones, then one line per action,
+`- <action text> ([[<page>#^<id>]])`, without the `#session` tag and WITHOUT a trailing `^id` of its own (the id
+belongs to the page; the link points at it). No open ones: keep the file with the single line
+`Nothing waiting for a session.` Never add a `## Next actions` heading or `type: project` to it.
 **Questions ping the owner.** Name every question file `notify/YYYY-MM-DDTHHMM-question-<slug>.md`
 (time as in Run protocol step 6) and write it as plain text (no `> [!question]` callout, no
 wiki-links): the relay @mentions the owner on Discord for files whose name contains `question`, so
