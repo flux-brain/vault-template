@@ -13,3 +13,4 @@ at most three suggested priorities for the coming week.
 Fix broken `[[links]]`, orphan pages (not in `index.md`), missing frontmatter, duplicate pages for
 the same entity (merge, keep the older file name). Record fixes in `log.md`. Leave `memory-proposals/`
 and `calendar/` untouched, and keep every project page's `memory:` field (add one if a page lacks it).
+Rebuild `session.md` from the pages' open `#session` actions (CLAUDE.md, "`session.md`") and note in `log.md` if it had drifted.
