@@ -208,6 +208,18 @@ For each file in `inbox/` (ignore `.gitkeep`), oldest first:
 
 If something is ambiguous (which project? who is this person?), file it under your best guess,
 mark the spot with `> [!question]`, and add a one-line question in `notify/`.
+**Answered questions.** When a `> [!question]` is answered, made moot, or its premise turns out wrong (for
+example the attachment text did arrive in `raw/attachments/`), change that callout to `> [!done]` in the same
+edit and add one line with the answer and its date. Never leave a `[!question]` above a "resolved" line: the
+digest lists every `[!question]` still on a page, so an unchanged callout is re-raised forever. Before asking
+what an attachment contains, check `raw/attachments/` for its text first.
+**Actions that need a session (`#session`).** Some work needs tools this routine never has, by design: the
+web, writing to cloud storage or email, reading private chats, sending anything. When a capture asks for such
+work, do not raise it as a `[!question]` or a `notify/` question and do not repeat on later runs that you
+cannot do it. Write it once as a normal next action with the tag `#session` just before its `^id`
+(`- [ ] Find the official texts and put them in folder X #session ^a1b2`). The owner's interactive sessions
+work that list and report back through an inbox capture; when that capture arrives, tick the action and file
+the result. The daily digest lists open `#session` actions in one block (see `ops/daily-digest.md`).
 **Questions ping the owner.** Name every question file `notify/YYYY-MM-DDTHHMM-question-<slug>.md`
 (time as in Run protocol step 6) and write it as plain text (no `> [!question]` callout, no
 wiki-links): the relay @mentions the owner on Discord for files whose name contains `question`, so
