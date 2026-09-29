@@ -1,11 +1,12 @@
 # Daily digest
 
-Write `briefings/daily/YYYY-MM-DD.md`, short and factual. **Hard limit: 50 lines in total, headings and blank lines
+Write `briefings/daily/YYYY-MM-DD.md`, short and factual. **Hard limit: 60 lines in total, headings and blank lines
 included.** Each block below has its own line budget; one line per item, no sub-bullets, no paragraphs. An item
 appears in ONE block only: a dated action goes in Due soon and is left out of Open next actions; a waiting email is
-not repeated elsewhere. Block order and budgets: Today (10), Due soon (8), Waiting on (6), Needs a session (5),
-Open next actions (8), Captured and filed (6), Open questions (4), Connection (2). When a block has more items than
-its budget, keep the most urgent and end it with `+N more`. Before committing, count the lines: over 50 means cut
+not repeated elsewhere. Block order and item budgets (39 lines at most, which leaves room for the
+headings): Today (8), Due soon (6), Waiting on (5), Needs a session (4), Open next actions (6), Captured and
+filed (5), Open questions (3), Connection (2). When a block has more items than
+its budget, keep the most urgent and end it with `+N more`. Before committing, count the lines: over 60 means cut
 the lowest blocks further, never drop Today, Due soon, Waiting on or Needs a session.
 
 - **Today** (only if `calendar/<today>.md` exists): the day's events in time order, one line each. After an event,
