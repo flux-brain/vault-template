@@ -181,7 +181,10 @@ overlapping and get answers to the owner sooner.
    making it. If you find anything to change after it was pushed, put the marker back first (step 4: write
    `.run/active`, push `run: start`), then make the change in a commit that removes the marker again. A second
    thought pushed without the marker is the one way runs still overlap. Never edit a `notify/` file that was already
-   pushed (the relay posted it once and will not post the edit): write a new one.
+   pushed: write a new one. **After that final push, stop.** A capture that arrived during the run is for the next
+   run, which the relay starts once this one ends. The relay audits every commit: one pushed by a routine while no
+   marker is in place is reported in the log channel and holds the next start, and an edited `notify/` file is
+   posted again as an update, so a late change is always visible.
 
 ## Operations
 
@@ -214,7 +217,8 @@ For each file in `inbox/` (ignore `.gitkeep`), oldest first:
 5. Update `index.md` and append one line per capture to `log.md`:
    `YYYY-MM-DD HH:MM ingest <capture file> -> <pages touched>`.
 6. **Tell the owner what you did.** When the run filed at least one capture, write ONE
-   `notify/YYYY-MM-DDTHHMM-filed.md` for the whole run (the relay posts it to the muted log channel;
+   `notify/YYYY-MM-DDTHHMMSS-filed.md` for the whole run, named from the current UTC time WITH seconds, so it never
+   lands on an earlier run's summary; if that name exists anyway, add `-2` before `-filed` (the relay posts it to the muted log channel;
    questions and drafts go to the capture channel). Plain text, no wiki-links, no `**`: a first line
    `Filed N capture(s)`, then one line per capture saying where it came from and what it is in a few
    words (`Discord: call notes`, `Keep: ticks on project X`, `Gmail: audit draft`; the source is the
