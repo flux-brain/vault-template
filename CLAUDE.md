@@ -157,10 +157,10 @@ overlapping and get answers to the owner sooner.
 2. **Nothing to do:** if `inbox/` holds no capture (ignore `.gitkeep`), no page was edited on a device since the
    last run (see "Edits made directly on a page in Obsidian" below: run its two commands now) and this run is not
    writing a digest or a review, end the run now: no marker, no commit.
-3. **Another run working:** if `.run/active` exists and its `started:` time is less than 10 minutes ago, another run
+3. **Another run working:** if `.run/active` exists and its `started:` time is less than 20 minutes ago, another run
    is in progress. End this run now without changing or committing anything; the relay starts a new run when that
    one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
-   check again, for at most 10 minutes) so the briefing is not skipped. A marker 10 minutes old or more is stale:
+   check again, for at most 20 minutes) so the briefing is not skipped. A marker 20 minutes old or more is stale:
    overwrite it.
 4. **Marker:** run `mkdir -p .run` first (the folder does not exist while no run is active, so writing the file alone fails), then write `.run/active` containing one line `started: <current UTC time, YYYY-MM-DDTHH:MM:SSZ>`, then
    `git add .run/active && git commit -q -m "run: start" && git push -q origin main`. If that push is rejected, run
