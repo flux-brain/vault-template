@@ -154,8 +154,9 @@ The relay on the owner's server starts runs as soon as captures arrive; these st
 overlapping and get answers to the owner sooner.
 
 1. `git pull --rebase origin main`.
-2. **Nothing to do:** if `inbox/` holds no capture (ignore `.gitkeep`) and this run is not writing a digest or a
-   review, end the run now: no marker, no commit.
+2. **Nothing to do:** if `inbox/` holds no capture (ignore `.gitkeep`), no page was edited on a device since the
+   last run (see "Edits made directly on a page in Obsidian" below: run its two commands now) and this run is not
+   writing a digest or a review, end the run now: no marker, no commit.
 3. **Another run working:** if `.run/active` exists and its `started:` time is less than 10 minutes ago, another run
    is in progress. End this run now without changing or committing anything; the relay starts a new run when that
    one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
@@ -284,6 +285,26 @@ changes:
 Never for `source: memory` or `source: gmail` captures, and never for your own changes. Do not edit or
 delete files in `memory-proposals/`: the server applies what it safely can (a plain `done` it can locate
 in memory, by `action_id` or by exact text) and posts the rest to Discord for review.
+
+**Edits made directly on a page in Obsidian.** The owner also ticks, reopens, adds or rewords actions by editing a
+project page itself in Obsidian, on a laptop or a phone. Such an edit reaches the repository as a plain commit, with
+no capture, so the rule above never sees it and memory would keep the action open. Find these edits at step 2 of the
+run protocol, before the marker:
+```
+BASE=$(git log -1 --format=%H --author='^Claude <' --grep='^run: start$')
+git log --reverse --format='%h %s' $BASE..HEAD -- wiki/projects/ | grep -E '^[0-9a-f]+ (laptop:|phone:|vault backup:|Last Sync:)'
+```
+Those message prefixes are the devices' sync commits (`vault backup:` is the Obsidian Git plugin's default, `Last
+Sync:` GitSync's on Android; set the laptop plugin's messages to `laptop: {{date}}` to make it obvious); nothing
+else may use them. For each page these commits touched, read the action lines they changed (`git show <hash> --
+<page>`, in order) and NET them out: a tick followed by an untick is no change, and so is an edit already undone on
+the page. Then drop any change the page's memory files (in `memory/`) already reflect: a reopen of an action memory
+still shows as open, a done that memory already marks done. For each page with a remaining change and a non-empty
+`memory:` list, write ONE proposal exactly as above with `source: obsidian` and, in place of `capture:`,
+`commits: [<the short hashes>]`. Do not change the page: the owner's edit is the page's truth. Append one line to
+`log.md` per page, `YYYY-MM-DD HH:MM page-edit <hashes> -> <page>: <net change>`, even when the net change is
+nothing or the page has no memory list: it records that these commits were seen. Never treat a commit with any other
+message as a device edit (sessions, the server and the routine also edit pages).
 
 **A memory item that records a HOLD is never struck automatically.** If the item a tick would strike
 says it is suspended, frozen, not to be sent, not to be reopened, or carries a warning marker, the
