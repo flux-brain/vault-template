@@ -235,13 +235,30 @@ example the attachment text did arrive in `raw/attachments/`), change that callo
 edit and add one line with the answer and its date. Never leave a `[!question]` above a "resolved" line: the
 digest lists every `[!question]` still on a page, so an unchanged callout is re-raised forever. Before asking
 what an attachment contains, check `raw/attachments/` for its text first.
-**Actions that need a session (`#session`).** Some work needs tools this routine never has, by design: the
-web, writing to cloud storage or email, reading private chats, sending anything. When a capture asks for such
-work, do not raise it as a `[!question]` or a `notify/` question and do not repeat on later runs that you
-cannot do it. Write it once as a normal next action with the tag `#session` just before its `^id`
-(`- [ ] Find the official texts and put them in folder X #session ^a1b2`). The owner's interactive sessions
-work that list and report back through an inbox capture; when that capture arrives, tick the action and file
-the result. The daily digest lists open `#session` actions in one block (see `ops/daily-digest.md`).
+**Who does the work: you, the owner in one gesture, or a session (`#session`).** When a capture asks for
+work, take the FIRST of these that fits, and write it once:
+1. **You do it in this run** when it needs only the repository: file, link, tick, reword, date an action,
+   answer from the pages, or write a requested text. A requested email, letter or message is yours to write,
+   IN FULL, in its own `notify/` file; only turning it into a mailbox draft or sending it is someone else's
+   step.
+2. **One gesture by the owner** when what is left is a single step they can make themselves, from their
+   phone, right now: write a plain next action (NO `#session`) that names the exact gesture. The gestures
+   that exist depend on the server modules that are on: give an email conversation the filing label (the
+   server files it) or the "no reply needed" label (it leaves the Waiting on list); post a file or a document
+   link in the capture channel (the server stores and converts it); tick the action in Google Tasks or on the
+   page; or do the thing themselves (call, sign, pay, decide). You cannot create a chat post or a button, so
+   never write "wait for a triage post" or "tap the button".
+3. **`#session`** only when the work needs a credential or a tool the owner does not have in one gesture: the
+   web, creating or changing anything in cloud storage or email beyond those labels (a mailbox draft, an
+   attachment, a file moved or saved), sending anything, reading private chats, changing memory beyond a
+   tick, changing the server's settings, the routines or the runbook. Write it as a normal next action with
+   the tag `#session` just before its `^id`
+   (`- [ ] Find the official texts and put them in folder X #session ^a1b2`).
+In lanes 2 and 3, do not raise the work as a `[!question]` or a `notify/` question and do not repeat on later
+runs that you cannot do it. Do not tag `#session` what lane 2 covers: a session is the slowest path. The owner's
+interactive sessions work the `#session` list and report back through an inbox capture; when that capture
+arrives, tick the action and file the result. The daily digest lists open `#session` actions in one block and
+lane 2 actions with the other open next actions (see `ops/daily-digest.md`).
 **`session.md` (the session queue).** A top-level file listing every open `#session` action across all pages,
 so a session reads one file. Whenever a run adds, rewords or ticks a `#session` action, rebuild it from the
 pages (not by hand-editing lines): one `## <page title>` heading per page with open ones, then one line per action,
