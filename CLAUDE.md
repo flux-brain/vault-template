@@ -274,7 +274,8 @@ only when the owner asks, in their own words or through a session capture. You m
    with a line at its end saying what is done and what remains, and say so in the filed summary. A large move takes
    long; several in one run overrun the run marker and another run starts beside you.
 2. **Census before.** Before the first edit:
-   `grep -hE '^\s*[-*] \[[ xX]\] ' wiki/projects/*.md | grep -oE '\^[a-z0-9]{4}\s*$' | tr -d ' \t' | sort > /tmp/ids.before`
+   `awk 'FNR==1{f=0} /^## Next actions/{f=1;next} /^## /{f=0} f' wiki/projects/*.md | grep -oE '\^[a-z0-9]{4}\s*$' | tr -d ' \t' | sort > /tmp/ids.before`
+   (every id that ends a line inside a `## Next actions` section, so an action written over several lines counts too)
 3. **New page** from `templates/project.md`: `status: active`, a `memory:` field naming the parent's memory files that
    concern the moved actions (never empty when the parent has one; if unsure, copy the parent's), the "Sub-project
    of" line, a line in `index.md`, a line in `log.md`, and the parent's "Sub-projects" line. Keep `## Next actions`
