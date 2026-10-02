@@ -16,3 +16,21 @@ and `calendar/` untouched, and keep every project page's `memory:` field (add on
 Due dates: for each open action on an active page, when the page, its captures or its `memory:` files state a
 deadline and the action has no `📅`, add it (and fix a `📅` that no longer matches its source); log each change.
 Rebuild `session.md` from the pages' open `#session` actions (CLAUDE.md, "`session.md`") and note in `log.md` if it had drifted.
+
+## Structure (with the weekly review)
+
+Suggest, never do (CLAUDE.md, "Project structure"). After the lint, look at every `status: active` project page and
+add a block "Structure" to the weekly briefing with AT MOST TWO suggestions, the strongest first, or omit the block.
+Each suggestion is one line: the page, what to do, the action ids concerned, the reason. the owner answers in the capture
+channel; a later run carries it out, one change per run.
+
+| Suggest | When |
+|---|---|
+| Split out a sub-project | 15 or more open actions on the page, or five or more that share a deadline, a prefix or the same people |
+| Move reference sections to a sub-project | the page is over about 60 KB and the bulk belongs to one group of actions |
+| Close a sub-project (`status: done`) | no open action for 14 days |
+| Fold a sub-project back into its parent | two or fewer open actions and no change for 30 days |
+| Merge two pages | mostly the same `memory:` files and few actions on each |
+
+Skip a suggestion the page's Log records as declined (`structure: declined ...`) unless its condition for raising it
+again is met. Count with the shell, do not estimate: open actions are the `- [ ]` lines under `## Next actions`.
