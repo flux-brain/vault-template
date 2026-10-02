@@ -265,6 +265,34 @@ pages (not by hand-editing lines): one `## <page title>` heading per page with o
 `- <action text> ([[<page>#^<id>]])`, without the `#session` tag and WITHOUT a trailing `^id` of its own (the id
 belongs to the page; the link points at it). No open ones: keep the file with the single line
 `Nothing waiting for a session.` Never add a `## Next actions` heading or `type: project` to it.
+**Project structure: sub-projects, splits, folds and merges.** A sub-project is an ordinary
+project page that says "Sub-project of [[parent]]" near its top; the parent names it on a "Sub-projects" line near
+its own top. You NEVER create a sub-project, split a page, fold one back or merge two pages on your own initiative:
+only when the owner asks, in their own words or through a session capture. You may SUGGEST one in the weekly review only
+(`ops/weekly-review.md`, "Structure"). When asked:
+1. **One structural change per run.** A capture that asks for several: do the first, leave the capture in `inbox/`
+   with a line at its end saying what is done and what remains, and say so in the filed summary. A large move takes
+   long; several in one run overrun the run marker and another run starts beside you.
+2. **Census before.** Before the first edit:
+   `grep -hE '^\s*[-*] \[[ xX]\] ' wiki/projects/*.md | grep -oE '\^[a-z0-9]{4}\s*$' | tr -d ' \t' | sort > /tmp/ids.before`
+3. **New page** from `templates/project.md`: `status: active`, a `memory:` field naming the parent's memory files that
+   concern the moved actions (never empty when the parent has one; if unsure, copy the parent's), the "Sub-project
+   of" line, a line in `index.md`, a line in `log.md`, and the parent's "Sub-projects" line. Keep `## Next actions`
+   spelled exactly.
+4. **Move, never rewrite.** Move only the actions and sections named. Cut and paste each action line with its `^id`,
+   text unchanged, no new id. A section moves whole, heading included, byte for byte. EDIT the parent by deleting
+   exactly those lines: never retype or regenerate its `## Next actions` list or any section that stays. Repoint
+   wiki-links that targeted a moved heading or action.
+5. **Fold back or merge:** the same in reverse. Open actions return to the receiving page with their ids; the page
+   that empties gets `status: done` and one line pointing at the page that took over. Never delete a page.
+6. **Census after, before the final push:** the same command into `/tmp/ids.after`, then
+   `diff /tmp/ids.before /tmp/ids.after`. A line starting with `<` is an action that vanished: put it back where it
+   was before you push. Lines starting with `>` are only ids you minted for new actions in this run. No id may appear
+   twice (`sort /tmp/ids.after | uniq -d` prints nothing).
+7. **Report the count.** The filed summary and the Log entry on each page state: ids before N, after N, the ids
+   moved, and "none dropped" (or the ones restored). Rebuild `session.md`. A move writes no memory proposal.
+A suggestion the owner declines: add a Log line `structure: declined <what> (YYYY-MM-DD)` on the page, and do not suggest
+it again unless the page has gained five or more open actions since, or 60 days have passed.
 **Questions ping the owner.** Name every question file `notify/YYYY-MM-DDTHHMM-question-<slug>.md`
 (time as in Run protocol step 6) and write it as plain text (no `> [!question]` callout, no
 wiki-links): the relay @mentions the owner on Discord for files whose name contains `question`, so
