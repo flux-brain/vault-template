@@ -9,6 +9,25 @@ This repository is a **template**: press "Use this template" on GitHub to get yo
 It contains the rules Claude follows (`CLAUDE.md`), the folder layout, the page template and the
 instructions for the daily digest and the weekly review. It contains no content.
 
+## In plain words
+
+Think of Flux as a **chief of staff with a very strict security badge**: it files, drafts and briefs
+you, and it cannot send or spend anything without you.
+
+| Part of Flux | In an office | What it does |
+|---|---|---|
+| The repository | The filing cabinet | The one place where everything is kept, and the only record that counts |
+| The routines | An analyst locked in the file room | Reads everything, files, summarises, drafts and raises questions, with no phone, no internet and no company card |
+| The server programs | The mailroom | Carries things in and out on fixed rounds, follows procedures, never makes a judgement call |
+| The `#flux` channel | The in-tray and out-tray on your desk | Where you drop things and where answers come back |
+| The daily digest | The morning briefing note | What is due, what is waiting on others, what needs you |
+| An interactive session | A meeting with a senior associate who can sign | Thinks and acts outside the office, only while you are in the room and say yes |
+
+The analyst who reads all the incoming mail is deliberately the one who cannot act outside. A forged
+letter can say "wire the money", but the person reading it has no access to the bank. This is
+separation of duties, the control a finance team uses: whoever opens the post does not sign the
+cheques.
+
 ## Architecture
 
 ```mermaid
@@ -131,6 +150,10 @@ flowchart TB
 | 1. Flux by itself | The routine and the server programs | File a capture, link pages, tick or date an action, write a requested text in full, the daily digest | Done within minutes; the result is posted in `#flux` |
 | 2. You, one gesture | You, from your phone | Give an email the filing label, tick a task, post a file or a document link in `#flux` | A plain next action that names the gesture |
 | 3. You, in a session | You, with an interactive Claude Code session | Web research, saving or changing a file in cloud storage, a real draft in your mailbox, sending anything | A next action tagged `#session`, gathered in `session.md` |
+
+In the office picture these are three levels of delegation: "handled" (the analyst and the mailroom do
+it without you), "needs your initials" (one small gesture and the staff finish the job) and "needs a
+meeting" (anything sent, spent or changed outside waits until you sit down with the associate).
 
 Why three: the routine can think but can touch nothing outside the repository, and the server programs
 can reach your accounts but only follow fixed rules. Only an interactive session has both, and it acts
