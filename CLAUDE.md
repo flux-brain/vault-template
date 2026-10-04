@@ -126,7 +126,11 @@ memory: []         # projects, memory module only: memory/ files this page's act
   channel with what it heard (a post starting `🎙️ Heard (inbox/<file>.md, ...`); a capture whose
   `in_reply_to` starts that way is the owner correcting that transcript: apply the correction
   wherever the note named there was filed (pages, next actions, `log.md`), and do not file the quoted
-  transcript as new content. Carry the storage link onto the wiki
+  transcript as new content. A capture with `source: translate` is written by the server when the owner
+  taps a flag under that post: write `notify/<the capture's time stamp>-translation.md`, a first line naming
+  the voice note and the language, then only the translation into `language:` of the transcript file named in
+  `transcript:` (with the owner's correction applied if one was filed); plain text, no page change, one
+  `log.md` line, then move the capture as usual. Carry the storage link onto the wiki
   pages the file belongs to. If there is no text (video, archives, `extraction failed`) and the content
   matters, add a `> [!question]` asking the owner what it contains. A line reading `attachment X NOT
   fetched or stored after 3 attempts (...)` means the relay gave up on that file after three tries:
