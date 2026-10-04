@@ -37,3 +37,14 @@ in the language of the email, no en or em dashes). If that Gmail capture is not 
 leave the triage capture in `inbox/` for the next run. Never reply to anyone yourself. A ✅ tap needs nothing from
 you: it only produces the ordinary Gmail capture.
 
+
+**`kind: voicemail`.** A voicemail left on the owner's phone: the phone operator sends it as an email with the recording
+attached, and the server files each one by itself, with no label from the owner (`[gmail] voicemail_from` in
+flux.toml). The email gives the caller's number, the time and the length; what the caller said is the transcript in
+the attachment's text file. The server has already posted that transcript in `#flux` and archived the email.
+A transcript can mishear names and numbers: quote it as heard, and if the owner replies to the 📞 post with a
+correction, apply it where the voicemail was filed. File it as a dated log line on the page of the person or project
+it concerns when the caller names themselves or the number is already on a page; otherwise one line in `log.md` is
+enough, and never create a page for an unknown number. Write a new action only where the caller clearly asks for
+something (to be called back, a decision, a document). A voicemail where nothing could be heard is a missed call:
+log it, no page change, no action.
