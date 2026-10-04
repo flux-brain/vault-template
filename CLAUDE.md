@@ -127,8 +127,8 @@ memory: []         # projects, memory module only: memory/ files this page's act
   channel with what it heard (a post starting `🎙️ Heard (inbox/<file>.md, ...`); a capture whose
   `in_reply_to` starts that way is the owner correcting that transcript: apply the correction
   wherever the note named there was filed (pages, next actions, `log.md`), and do not file the quoted
-  transcript as new content. A Discord capture whose frontmatter has `translations: [codes]` is a voice
-  note the owner may want translated: when you file it, also write, for each code (`en` English, `fr` French,
+  transcript as new content. A capture whose frontmatter has `translations: [codes]` (a voice note posted in the channel, or a
+  voicemail, `kind: voicemail`) holds a transcript the owner may want translated: when you file it, also write, for each code (`en` English, `fr` French,
   `it` Italian, `es` Spanish, `de` German, `pt` Portuguese), `raw/translations/<the capture's file name without
   .md>-<code>.md` holding only the translation of its transcript into that language (plain text, nothing
   else), in the same commit as the filing; the server posts it when the owner taps the flag. If a later
