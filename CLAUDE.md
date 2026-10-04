@@ -71,6 +71,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `inbox/` | the owner (via the Discord relay, Obsidian, or an optional module) | Raw captures waiting to be processed |
 | `raw/captures/YYYY/MM/` | Claude moves, never edits | Processed captures, immutable source of truth |
 | `raw/attachments/<file>.md` | relays | Text of each attachment (PDF/image OCR, Office, email, audio transcript); the original file stays in the owner's cloud storage |
+| `raw/translations/<file>.md` | Claude | Translation of a voice note, written when the note is filed (see Attachments); the relay posts it when the owner taps a flag |
 | `calendar/YYYY-MM-DD.md` | server Calendar module, READ-ONLY, optional | One file per day, today and the week ahead; a day that has ended stays as it stood. Read it, never edit, move or delete it |
 | `followups/waiting.md` | server follow-up module, READ-ONLY | the owner's sent emails still waiting for an answer, oldest first (recipients, subject, Gmail link). Read it, never edit it |
 | `memory/` | server mirror, READ-ONLY, optional | The owner's memory store (see above) |
@@ -126,8 +127,13 @@ memory: []         # projects, memory module only: memory/ files this page's act
   channel with what it heard (a post starting `🎙️ Heard (inbox/<file>.md, ...`); a capture whose
   `in_reply_to` starts that way is the owner correcting that transcript: apply the correction
   wherever the note named there was filed (pages, next actions, `log.md`), and do not file the quoted
-  transcript as new content. A capture with `source: translate` is written by the server when the owner
-  taps a flag under that post: write `notify/<the capture's time stamp>-translation.md`, a first line naming
+  transcript as new content. A Discord capture whose frontmatter has `translations: [codes]` is a voice
+  note the owner may want translated: when you file it, also write, for each code (`en` English, `fr` French,
+  `it` Italian, `es` Spanish, `de` German, `pt` Portuguese), `raw/translations/<the capture's file name without
+  .md>-<code>.md` holding only the translation of its transcript into that language (plain text, nothing
+  else), in the same commit as the filing; the server posts it when the owner taps the flag. If a later
+  capture corrects that transcript, rewrite those files. A capture with `source: translate` is the server's
+  fallback when the owner tapped a flag and no such file existed: write `notify/<the capture's time stamp>-translation.md`, a first line naming
   the voice note and the language, then only the translation into `language:` of the transcript file named in
   `transcript:` (with the owner's correction applied if one was filed); plain text, no page change, one
   `log.md` line, then move the capture as usual. Carry the storage link onto the wiki
