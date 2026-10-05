@@ -89,7 +89,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `templates/` | the owner + Claude | Page templates |
 | `ops/` | the owner + Claude | Instructions for one kind of capture or run (read when that kind is present) |
 | `flux.md` | the owner | Owner settings (name, time zone, languages, channels, modules) |
-| `.run/active` | Claude | Marker of a run in progress (see Run protocol); the relay reads it |
+| `.run/active` | the relay, or Claude | Marker of a run in progress (see Run protocol): written by the relay for a run it starts, by the run itself otherwise; the run removes it |
 
 The owner may write anywhere; Claude treats the owner's own edits in `wiki/` as authoritative and
 merges around them rather than overwriting.
@@ -170,13 +170,22 @@ overlapping and get answers to the owner sooner.
 1. `git pull --rebase origin main`.
 2. **Nothing to do:** if `inbox/` holds no capture (ignore `.gitkeep`), no page was edited on a device since the
    last run (see "Edits made directly on a page in Obsidian" below: run its two commands now) and this run is not
-   writing a digest or a review, end the run now: no marker, no commit.
-3. **Another run working:** if `.run/active` exists and its `started:` time is less than 20 minutes ago, another run
-   is in progress. End this run now without changing or committing anything; the relay starts a new run when that
+   writing a digest or a review, end the run now: no marker, no commit. One exception: when the start message names
+   a run id and `.run/active` holds it (step 4), the relay wrote a marker for this run: remove it before ending
+   (`git rm -q .run/active && git commit -q -m "run: end" && git push -q origin main`), or it holds the next runs.
+3. **Another run working:** if `.run/active` exists, its `started:` time is less than 20 minutes ago and it is not
+   this run's own marker (step 4: the relay may have written it for this run), another run is in progress. End this run now without changing or committing anything; the relay starts a new run when that
    one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
    check again, for at most 20 minutes) so the briefing is not skipped. A marker 20 minutes old or more is stale:
    overwrite it.
-4. **Marker:** run `mkdir -p .run` first (the folder does not exist while no run is active, so writing the file alone fails), then write `.run/active` containing one line `started: <current UTC time, YYYY-MM-DDTHH:MM:SSZ>`, then
+4. **Marker:** a run started by the relay normally has its marker already. Its start message then says
+   `Run marker: the relay already wrote .run/active for this run (run id <id>)`, and `.run/active`, in place after
+   step 1, holds a line `run: <id>`. Run `cat .run/active` and compare: when the id in the file is the id in the
+   start message, the marker is this run's own. Do NOT write, commit or push a marker then: go on to step 5 at once.
+   (The relay writes it because a run's own marker push was the step that failed: skipped, or rejected while `main`
+   moved.) A fresh `.run/active` holding a different run id, or none, is another run's: step 3 applies.
+   In every other case (a run started by the schedule, no run id in the start message, no `.run/active`, or a stale
+   one), write the marker yourself: run `mkdir -p .run` first (the folder does not exist while no run is active, so writing the file alone fails), then write `.run/active` containing one line `started: <current UTC time, YYYY-MM-DDTHH:MM:SSZ>`, then
    `git add .run/active && git commit -q -m "run: start" && git push -q origin main`. If that push is rejected, run
    `git fetch origin main && git reset --hard origin/main` (safe: nothing else has been done yet) and go back to step 3.
 5. **Start message:** a run started by the relay receives a line `Inbox now holds: ...` listing each capture with its
@@ -351,9 +360,12 @@ project page itself in Obsidian, on a laptop or a phone. Such an edit reaches th
 no capture, so the rule above never sees it and memory would keep the action open. Find these edits at step 2 of the
 run protocol, before the marker:
 ```
-BASE=$(git log -1 --format=%H --author='^Claude <' --grep='^run: start$')
+END=$(git log -1 --format=%H --author='^Claude <' --diff-filter=D -- .run/active)
+BASE=$(git log -1 --format=%H --diff-filter=A "${END:-HEAD}" -- .run/active)
 git log --reverse --format='%h %s' $BASE..HEAD -- wiki/projects/ | grep -E '^[0-9a-f]+ (laptop:|phone:|vault backup:|Last Sync:)'
 ```
+`BASE` is the start of the last run that finished: the commit that added the marker which that run's last commit
+(`END`) removed, whoever wrote that marker (the run or the relay).
 Those message prefixes are the devices' sync commits (`vault backup:` is the Obsidian Git plugin's default, `Last
 Sync:` GitSync's on Android; set the laptop plugin's messages to `laptop: {{date}}` to make it obvious); nothing
 else may use them. For each page these commits touched, read the action lines they changed (`git show <hash> --
