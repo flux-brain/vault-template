@@ -6,7 +6,9 @@ Obsidian vault maintained by Claude using the LLM Wiki pattern
 The owner captures; Claude files, links, synthesizes, reviews, drafts and asks. The owner reads in
 Obsidian (phone or laptop) and talks to Flux through a Discord channel (`#flux` by default); a second,
 muted channel (`#flux-log`) carries what needs no human: run summaries, run links, "note received"
-notices.
+notices. The owner may give some kinds of post a channel of their own (digests, posts that wait for a tap,
+voicemail notices; `flux.md` lists them): the server chooses where each post goes, nothing changes in what you
+write, and what the owner writes in any of them arrives as an ordinary Discord capture.
 
 ## Owner settings
 
