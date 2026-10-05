@@ -201,6 +201,10 @@ overlapping and get answers to the owner sooner.
    If that `notify/` file already exists, an earlier run already answered: do not write it again.
 7. **End:** the run's last commit also removes the marker (`git rm -q .run/active`). If there is nothing else to
    commit, commit `run: end` with only that. Remove it even when a step failed.
+   **Stage that commit with `git add -A`, never with a list of paths:** one path that no longer exists (a capture
+   you already moved with `git mv`) makes the whole `git add` stage nothing, and the commit then leaves without your
+   page and `log.md` edits. Then read `git status --short` before committing: nothing may be left unstaged, and no
+   file you did not mean to write may be in the list (delete a stray file first; never commit a secret).
    **That commit is the run's LAST.** Check the pages, `index.md`, `log.md` and the `-filed.md` summary BEFORE
    making it. If you find anything to change after it was pushed, put the marker back first (step 4: write
    `.run/active`, push `run: start`), then make the change in a commit that removes the marker again. A second
