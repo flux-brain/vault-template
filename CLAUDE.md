@@ -170,7 +170,9 @@ overlapping and get answers to the owner sooner.
 1. `git pull --rebase origin main`.
 2. **Nothing to do:** if `inbox/` holds no capture (ignore `.gitkeep`), no page was edited on a device since the
    last run (see "Edits made directly on a page in Obsidian" below: run its two commands now) and this run is not
-   writing a digest or a review, end the run now: no marker, no commit.
+   writing a digest or a review, end the run now: no marker, no commit. One exception: when the start message names
+   a run id and `.run/active` holds it (step 4), the relay wrote a marker for this run: remove it before ending
+   (`git rm -q .run/active && git commit -q -m "run: end" && git push -q origin main`), or it holds the next runs.
 3. **Another run working:** if `.run/active` exists, its `started:` time is less than 20 minutes ago and it is not
    this run's own marker (step 4: the relay may have written it for this run), another run is in progress. End this run now without changing or committing anything; the relay starts a new run when that
    one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
@@ -359,7 +361,7 @@ no capture, so the rule above never sees it and memory would keep the action ope
 run protocol, before the marker:
 ```
 END=$(git log -1 --format=%H --author='^Claude <' --diff-filter=D -- .run/active)
-BASE=$(git log -1 --format=%H --diff-filter=A "$END" -- .run/active)
+BASE=$(git log -1 --format=%H --diff-filter=A "${END:-HEAD}" -- .run/active)
 git log --reverse --format='%h %s' $BASE..HEAD -- wiki/projects/ | grep -E '^[0-9a-f]+ (laptop:|phone:|vault backup:|Last Sync:)'
 ```
 `BASE` is the start of the last run that finished: the commit that added the marker which that run's last commit
