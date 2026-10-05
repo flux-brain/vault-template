@@ -122,6 +122,9 @@ can watch Claude work.
 - **Answers and drafts** arrive in `notify/` and are posted to `#flux`, ready to copy. **Questions**
   from Claude @mention you. Answer by replying in the channel; the answer comes back through the inbox.
 - **Reviews:** a daily digest and, on Sundays, a weekly project review, posted to `#flux`.
+- **More channels, if you want them:** the digests, the posts that wait for a tap and the voicemail
+  notices can each have a channel of their own, so `#flux` keeps only your captures and Claude's
+  answers and questions. Name them in `flux.toml`; until a channel exists its posts stay in `#flux`.
 - **Optional modules**, each off until you turn it on: a Google Tasks list for every active project
   page, a Gmail label feed, your calendar as one file per day, a watch on chosen Drive folders, a list
   of your sent emails still waiting for an answer, and email triage with buttons in `#flux`. The

@@ -18,6 +18,11 @@ edit it when something changes. Keep it free of secrets: it is committed to the 
 
 - Capture channel: `#flux` (where you post and where Claude answers and asks)
 - Log channel: `#flux-log` (muted; run summaries, run links, "note received" notices)
+- Optional channels, each named in the server's `flux.toml` (`[discord]`); delete the lines you do not use.
+  Without one, its posts stay in the capture channel. What you write in them is read like a post in `#flux`.
+  - Digest channel: `#flux-digest` (the daily digest and the weekly review)
+  - Actions channel: `#flux-actions` (posts that wait for a tap: email triage, Drive folder suggestions)
+  - Voice channel: `#voice-notes` (voicemail notices)
 - Your Discord user id: set on the server side, not here (the relay @mentions you on questions)
 
 ## Optional modules (on / off)

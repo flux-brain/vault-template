@@ -30,7 +30,7 @@ project instead of labelling it. File it under that project (no guessing), with 
 capture; a matching `new action` line arrives in the same run's Tasks capture and names this file.
 
 **`source: triage`, `want: reply-draft` (the ✍️ button).** A server module posts new emails that probably matter in
-`#flux` with two buttons; the owner tapped ✍️ on one. The same conversation arrives as an ordinary `source: gmail`
+`#flux` (or the actions channel named in `flux.md`) with two buttons; the owner tapped ✍️ on one. The same conversation arrives as an ordinary `source: gmail`
 capture with the same `thread_id` (labelled at the same moment, filed within a minute). File the Gmail capture as
 usual, then write a reply draft to its latest message in `notify/` like any requested draft (complete, copy-ready,
 in the language of the email, no en or em dashes). If that Gmail capture is not in `inbox/` or `raw/captures/` yet,
@@ -41,7 +41,7 @@ you: it only produces the ordinary Gmail capture.
 **`kind: voicemail`.** A voicemail left on the owner's phone: the phone operator sends it as an email with the recording
 attached, and the server files each one by itself, with no label from the owner (`[gmail] voicemail_from` in
 flux.toml). The email gives the caller's number, the time and the length; what the caller said is the transcript in
-the attachment's text file. The server has already posted that transcript in `#flux` and archived the email.
+the attachment's text file. The server has already posted that transcript in `#flux` (or the voice channel named in `flux.md`) and archived the email.
 A transcript can mishear names and numbers: quote it as heard, and if the owner replies to the 📞 post with a
 correction, apply it where the voicemail was filed. When the capture has `translations: [codes]`, write the translations
 as for a voice note (CLAUDE.md, Attachments), and rewrite them after a correction. File it as a dated log line on the page of the person or project
