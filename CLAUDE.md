@@ -211,7 +211,21 @@ overlapping and get answers to the owner sooner.
    making it. If you find anything to change after it was pushed, put the marker back first (step 4: write
    `.run/active`, push `run: start`), then make the change in a commit that removes the marker again. A second
    thought pushed without the marker is the one way runs still overlap. Never edit a `notify/` file that was already
-   pushed: write a new one. **After that final push, stop.** A capture that arrived during the run is for the next
+   pushed: write a new one.
+   **A capture rewritten while you worked: one way to handle it.** The relay can rewrite a capture in place after
+   you read it (a memory capture gains more diffs when memory changes again; its commit reads `... (updated)`). You
+   learn it when the final push is rejected. After `git pull --rebase origin main` and BEFORE pushing again, every
+   time, run
+   `git diff --name-only $(git merge-base ORIG_HEAD origin/main) origin/main -- inbox/`.
+   A path in that list that you filed in this run was rewritten: the rebase carried the new text onto the file you
+   moved to `raw/captures/`. Read the moved file again, correct the page, `index.md`, `log.md` and the `-filed.md`
+   summary (it is not pushed yet, so edit it in place), then `git add -A`, read `git status --short`,
+   `git commit -q --amend --no-edit` and push. The marker is still on `main` during all of this, because the commit
+   that removes it has not been pushed: so no second commit, and no marker to put back. Do not make a separate
+   "fold-in" commit, and do not push first and correct afterwards. A path in the list that you did not file is a new
+   capture for the next run: leave it. Only when you notice the rewrite after the push went through does the rule
+   above apply (marker back first, then the correction).
+   **After that final push, stop.** A capture that arrived during the run is for the next
    run, which the relay starts once this one ends. The relay audits every commit: one pushed by a routine while no
    marker is in place is reported in the log channel and holds the next start, and an edited `notify/` file is
    posted again as an update, so a late change is always visible.
@@ -433,5 +447,7 @@ reuse a posted file. Delete `notify/` files older than 30 days during the weekly
 - Work on `main` only. Start with `git pull --rebase origin main`.
 - Commit messages: `inbox: <n> capture(s) filed`, `digest: YYYY-MM-DD`, `review: YYYY-Www`,
   `lint: <summary>`, `run: start`, `run: end`, `notify: <slug>` (see Run protocol).
-- Push to `origin main`. If the push is rejected, `git pull --rebase` and retry up to 3 times.
-- Never create branches, pull requests, tags, or force-push.
+- Push to `origin main`. If the push is rejected, `git pull --rebase` and retry up to 3 times. For the run's final
+  commit, run the rewritten-capture check of Run protocol step 7 after each such rebase, before the retry.
+- Never create branches, pull requests, tags, or force-push. Amending is allowed only on a commit that was never
+  pushed (Run protocol step 7).
