@@ -33,3 +33,11 @@ the lowest blocks further, never drop Today, Due soon, Waiting on or Needs a ses
 
 If nothing happened in 24 h, no actions are open and today's calendar file is empty or absent, write nothing and
 do not commit.
+
+**Last step of every daily run, digest written or not: rotate the log.** After the digest is written (you read
+`log.md` for it first) and before the run's final commit, run `sh ops/rotate-log.sh` from the repository root. It
+moves every log line older than 3 days, unchanged, into `log/YYYY-Www.md` (one file per ISO week), so that `log.md`
+stays small enough to be read whole. Its changes go into the run's final commit (`git add -A` picks them up; with
+no digest, that is the `run: end` commit). If it prints `line count mismatch`, restore with
+`git checkout log.md && git clean -fdq log/ && git checkout -- log/ 2>/dev/null`, say so in a `notify/` file and go
+on. Never move log lines by hand, never edit a file in `log/`, and never run the script in an inbox run.
