@@ -87,7 +87,8 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `notify/` | Claude | Short messages for the owner (the relay posts them to Discord) |
 | `index.md` | Claude | Router: one line per wiki page, grouped by folder |
 | `session.md` | Claude | Queue of open `#session` actions across all pages, rebuilt from the pages (see Page conventions) |
-| `log.md` | Claude | Append-only operations log, newest at the bottom |
+| `log.md` | Claude | Append-only operations log, newest at the bottom; holds the last few days only |
+| `log/YYYY-Www.md` | `ops/rotate-log.sh` | Older log lines, one file per ISO week, moved there unchanged by the daily run; never edit them, and do not read them unless a task needs older history |
 | `templates/` | the owner + Claude | Page templates |
 | `ops/` | the owner + Claude | Instructions for one kind of capture or run (read when that kind is present) |
 | `flux.md` | the owner | Owner settings (name, time zone, languages, channels, modules) |
@@ -425,7 +426,7 @@ field stays empty and no proposals are written.
 
 ### 2. Daily digest
 
-Read `ops/daily-digest.md` and follow it.
+Read `ops/daily-digest.md` and follow it, its last step (rotating the log) included.
 
 ### 3. Weekly project review (Sundays)
 
