@@ -25,6 +25,15 @@ processed (subject unknown, link); otherwise touch no page. In both cases ask th
 file whether the email matters: he can fix the cause and label the conversation `📁 Flux` again, and it is
 retried from scratch. In the filed summary: `Gmail: unprocessed conversation`.
 
+**`kind: followup`.** New messages in a conversation that was already filed (same `thread_id` as an earlier Gmail
+capture). The server keeps following the conversations it filed and files a later reply by itself, with no new label
+from the owner (`[gmail] follow_threads` in flux.toml). The capture holds only the new messages, plus the owner's own
+replies for context. Add them where the conversation was filed: find the earlier capture with the same `thread_id`
+in `raw/captures/` and the page(s) it went to, and add a dated `## Log` entry there; do not file it as a new
+conversation. Tick or reword an existing action when the reply settles it; add a new action only where the reply
+clearly asks the owner for something. If no earlier capture with that `thread_id` can be found, file it as an
+ordinary Gmail capture. In the filed summary: `Gmail: follow-up of <subject>`.
+
 **`project:` and `via: tasks` in the frontmatter.** The owner dragged this email into the Google Tasks list of that
 project instead of labelling it. File it under that project (no guessing), with its attachments as for any Gmail
 capture; a matching `new action` line arrives in the same run's Tasks capture and names this file.
