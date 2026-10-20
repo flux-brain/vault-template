@@ -1,6 +1,6 @@
 # Routine `vault-review`
 
-- Schedule: `0 5 * * *` (UTC; one run a day, so the digest is waiting when you wake up; 05:00 UTC is 07:00 Paris in summer).
+- Schedule: `0 5,6 * * *` (UTC). Two starts a day, one hour apart, so that one of them lands on `<review-hour>` local time in summer and in winter alike; the other stops at step 0 in a few seconds. 05:00 and 06:00 UTC fit 07:00 in Paris; pick the two UTC hours that fit your own `<review-hour>`. No change is needed when the clocks change.
 - No API trigger token needed.
 - Source: `https://github.com/<owner>/<vault>`, tools Bash, Read, Write, Edit, Glob, Grep, model `claude-sonnet-5`.
 
@@ -11,6 +11,7 @@ You maintain the Obsidian vault in this repository (<owner>/<vault>). Read CLAUD
 
 This is the daily REVIEW run.
 
+0. Clock check, FIRST, before reading CLAUDE.md or any git command: run `TZ=<TZ> date +%H`. If it does not print `<review-hour>`, stop now: no marker, no commit, final message `not <review-hour>:00 local time, skipped`.
 1. `git checkout main && git pull --rebase origin main`. Git may warn `you are leaving N commits behind` here: that is expected (the sandbox starts on a detached copy of the repository) and nothing is lost; do not investigate, go on to step 2.
 2. Run marker, BEFORE anything else: do CLAUDE.md Run protocol steps 3 and 4 now. If `.run/active` is less than 20 minutes old, another run is working: `sleep 60`, pull, check again, for at most 20 minutes (the digest must not be skipped). Then write `.run/active` and push the `run: start` commit. Never skip this step. A rejected push of the marker only means `main` moved meanwhile: `git fetch origin main && git reset --hard origin/main` and redo this step at once (Run protocol step 4); do not investigate the network or the proxy.
 3. If `inbox/` contains anything other than `.gitkeep`, ingest it first per CLAUDE.md Operations 1 and commit (`inbox: <n> capture(s) filed`), so the digest is current.

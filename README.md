@@ -103,10 +103,10 @@ Two routines, both with this repository as their working copy and `CLAUDE.md` as
 | Routine | Schedule (UTC) | Prompt |
 |---|---|---|
 | `vault-inbox` | hourly during your day, e.g. `0 6-20 * * *`, plus on-demand starts by the relay | [routines/vault-inbox.md](routines/vault-inbox.md) |
-| `vault-review` | once a day, e.g. `0 5 * * *` | [routines/vault-review.md](routines/vault-review.md) |
+| `vault-review` | once a day at a local hour, e.g. `0 5,6 * * *` | [routines/vault-review.md](routines/vault-review.md) |
 
 The `routines/` folder holds the exact prompts and settings (tools Bash, Read, Write, Edit, Glob and
-Grep, no connectors) with four placeholders to fill. Generate an API trigger token for `vault-inbox`; the
+Grep, no connectors) with five placeholders to fill. Generate an API trigger token for `vault-inbox`; the
 relay uses it to start a run the moment a capture arrives and posts the run link to `#flux-log` so you
 can watch Claude work.
 
