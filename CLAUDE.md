@@ -82,7 +82,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `wiki/people/` | Claude | One page per person |
 | `wiki/concepts/` | Claude | Evergreen idea and topic pages |
 | `wiki/sources/` | Claude | One summary page per substantial source (article, doc, meeting) |
-| `briefings/daily/YYYY-MM-DD.md` | Claude | Daily digest (the relay posts it to Discord) |
+| `briefings/daily/YYYY-MM-DD.md` | Claude | Your day ahead (the relay posts it to Discord) |
 | `briefings/weekly/YYYY-Www.md` | Claude | Weekly project review (the relay posts it to Discord) |
 | `notify/` | Claude | Short messages for the owner (the relay posts them to Discord) |
 | `index.md` | Claude | Router: one line per wiki page, grouped by folder |
@@ -149,7 +149,7 @@ memory: []         # projects, memory module only: memory/ files this page's act
 - Due dates: an action with a deadline carries `📅 YYYY-MM-DD` just before its `#session` tag and `^id`
   (`- [ ] Send the AGM notice 📅 2026-10-01 ^a1b2`; Obsidian's Tasks format). Set it only from a date a capture, a
   document or `memory/` states, never a guess; when the deadline moves, change it and say so in the page log. A
-  ticked action keeps its date. The daily digest counts down to these dates (`ops/daily-digest.md`).
+  ticked action keeps its date. Your day ahead counts down to these dates (`ops/daily-digest.md`).
 - Links: a Discord capture with a Google Docs, Sheets, Slides or Drive link has a `## Links` section written by the
   relay: the file's name, type, Drive folder and last edit (the folder name is often the project), and by default a
   link to its text in `raw/attachments/<file>.md`, like an attachment. The text is a copy made when the owner posted: the
@@ -184,7 +184,7 @@ overlapping and get answers to the owner sooner.
    (`git rm -q .run/active && git commit -q -m "run: end" && git push -q origin main`), or it holds the next runs.
 3. **Another run working:** if `.run/active` exists, its `started:` time is less than 20 minutes ago and it is not
    this run's own marker (step 4: the relay may have written it for this run), another run is in progress. End this run now without changing or committing anything; the relay starts a new run when that
-   one finishes. Exception: a run that writes the daily digest or the weekly review waits instead (`sleep 60`, pull,
+   one finishes. Exception: a run that writes Your day ahead or Your week ahead waits instead (`sleep 60`, pull,
    check again, for at most 20 minutes) so the briefing is not skipped. A marker 20 minutes old or more is stale:
    overwrite it.
 4. **Marker:** a run started by the relay normally has its marker already. Its start message then says
@@ -307,7 +307,7 @@ work, take the FIRST of these that fits, and write it once:
 In lanes 2 and 3, do not raise the work as a `[!question]` or a `notify/` question and do not repeat on later
 runs that you cannot do it. Do not tag `#session` what lane 2 covers: a session is the slowest path. The owner's
 interactive sessions work the `#session` list and report back through an inbox capture; when that capture
-arrives, tick the action and file the result. The daily digest lists open `#session` actions in one block and
+arrives, tick the action and file the result. Your day ahead lists open `#session` actions in one block and
 lane 2 actions with the other open next actions (see `ops/daily-digest.md`).
 **`session.md` (the session queue).** A top-level file listing every open `#session` action across all pages,
 so a session reads one file. Whenever a run adds, rewords or ticks a `#session` action, rebuild it from the
@@ -318,7 +318,7 @@ belongs to the page; the link points at it). No open ones: keep the file with th
 **Project structure: sub-projects, splits, folds and merges.** A sub-project is an ordinary
 project page that says "Sub-project of [[parent]]" near its top; the parent names it on a "Sub-projects" line near
 its own top. You NEVER create a sub-project, split a page, fold one back or merge two pages on your own initiative:
-only when the owner asks, in their own words or through a session capture. You may SUGGEST one in the weekly review only
+only when the owner asks, in their own words or through a session capture. You may SUGGEST one in Your week ahead only
 (`ops/weekly-review.md`, "Structure"). When asked:
 1. **One structural change per run.** A capture that asks for several: do the first, leave the capture in `inbox/`
    with a line at its end saying what is done and what remains, and say so in the filed summary. A large move takes
@@ -430,15 +430,15 @@ task's notes), the Keep sync maps its checklist item by it, and the server strik
 Without the memory module, action ids are still used (they keep Tasks and Keep items stable) but the `memory:`
 field stays empty and no proposals are written.
 
-### 2. Daily digest
+### 2. Your day ahead
 
 Read `ops/daily-digest.md` and follow it, its last step (rotating the log) included.
 
-### 3. Weekly project review (Sundays)
+### 3. Your week ahead (Sundays)
 
 Read `ops/weekly-review.md` and follow it (review, then lint).
 
-### 4. Lint (with the weekly review)
+### 4. Lint (with Your week ahead)
 
 Part of `ops/weekly-review.md`.
 
