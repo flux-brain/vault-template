@@ -7,7 +7,7 @@ laptop and talk to it through a Discord channel.
 
 This repository is a **template**: press "Use this template" on GitHub to get your own private copy.
 It contains the rules Claude follows (`CLAUDE.md`), the folder layout, the page template and the
-instructions for the daily digest and the weekly review. It contains no content.
+instructions for Your day ahead and Your week ahead. It contains no content.
 
 ## In plain words
 
@@ -20,7 +20,7 @@ you, and it cannot send or spend anything without you.
 | The routines | An analyst locked in the file room | Reads everything, files, summarises, drafts and raises questions, with no phone, no internet and no company card |
 | The server programs | The mailroom | Carries things in and out on fixed rounds, follows procedures, never makes a judgement call |
 | The `#flux` channel | The in-tray and out-tray on your desk | Where you drop things and where answers come back |
-| The daily digest | The morning briefing note | What is due, what is waiting on others, what needs you |
+| Your day ahead | The morning briefing note | What is due, what is waiting on others, what needs you |
 | An interactive session | A meeting with a senior associate who can sign | Thinks and acts outside the office, only while you are in the room and say yes |
 
 The analyst who reads all the incoming mail is deliberately the one who cannot act outside. A forged
@@ -42,7 +42,7 @@ flowchart TB
     modules["Optional modules<br/>Gmail, Tasks, Calendar, Drive"]
   end
   subgraph cloud["Claude Code cloud"]
-    routines["Routines<br/>vault-inbox, vault-review<br/>no connectors"]
+    routines["Routines<br/>vault-inbox<br/>no connectors"]
   end
   repo[("Your private repository<br/>inbox, wiki, notify, briefings")]
 
@@ -90,7 +90,7 @@ optional modules.
 1. Create the repository from the template, private.
 2. Edit `flux.md`: your name, time zone, languages, channel names, which optional modules are on.
    Delete the `ops/` files of modules you do not use.
-3. Create the two routines (below) and note the trigger token of the inbox one for the relay.
+3. Create the routine (below) and note its trigger token for the relay.
 4. Install the relay on your server ([flux-brain/server](https://github.com/flux-brain/server),
    `INSTALL.md`) with your Discord bot, channel names and the trigger token.
 5. Open the repository in Obsidian. Post something in `#flux`. Within a few minutes it is filed under
@@ -98,12 +98,11 @@ optional modules.
 
 ## Routines
 
-Two routines, both with this repository as their working copy and `CLAUDE.md` as their instructions:
+One routine, with this repository as its working copy and `CLAUDE.md` as its instructions:
 
 | Routine | Schedule (UTC) | Prompt |
 |---|---|---|
-| `vault-inbox` | hourly during your day, e.g. `0 6-20 * * *`, plus on-demand starts by the relay | [routines/vault-inbox.md](routines/vault-inbox.md) |
-| `vault-review` | once a day at a local hour, e.g. `0 5,6 * * *` | [routines/vault-review.md](routines/vault-review.md) |
+| `vault-inbox` | every hour, `30 * * * *`, plus on-demand starts by the relay; also writes Your day ahead and Your week ahead | [routines/vault-inbox.md](routines/vault-inbox.md) |
 
 The `routines/` folder holds the exact prompts and settings (tools Bash, Read, Write, Edit, Glob and
 Grep, no connectors) with five placeholders to fill. Generate an API trigger token for `vault-inbox`; the
@@ -121,7 +120,7 @@ can watch Claude work.
   in two to three minutes; the hourly run is the backstop.
 - **Answers and drafts** arrive in `notify/` and are posted to `#flux`, ready to copy. **Questions**
   from Claude @mention you. Answer by replying in the channel; the answer comes back through the inbox.
-- **Reviews:** a daily digest and, on Sundays, a weekly project review, posted to `#flux`.
+- **Briefings:** Your day ahead every morning and, on Sundays, Your week ahead, posted to `#flux-digest`.
 - **More channels, if you want them:** the digests, the posts that wait for a tap and the voicemail
   notices can each have a channel of their own, so `#flux` keeps only your captures and Claude's
   answers and questions. Name them in `flux.toml`; until a channel exists its posts stay in `#flux`.
@@ -150,7 +149,7 @@ flowchart TB
 
 | Lane | Who acts | Examples | How it shows up |
 |---|---|---|---|
-| 1. Flux by itself | The routine and the server programs | File a capture, link pages, tick or date an action, write a requested text in full, the daily digest | Done within minutes; the result is posted in `#flux` |
+| 1. Flux by itself | The routine and the server programs | File a capture, link pages, tick or date an action, write a requested text in full, Your day ahead | Done within minutes; the result is posted in `#flux` |
 | 2. You, one gesture | You, from your phone | Give an email the filing label, tick a task, post a file or a document link in `#flux` | A plain next action that names the gesture |
 | 3. You, in a session | You, with an interactive Claude Code session | Web research, saving or changing a file in cloud storage, a real draft in your mailbox, sending anything | A next action tagged `#session`, gathered in `session.md` |
 
@@ -163,7 +162,7 @@ can reach your accounts but only follow fixed rules. Only an interactive session
 only when you ask. Which gestures exist in lane 2 depends on the modules you turned on.
 
 Lane 3 has its own queue: `session.md`, at the top of the repository, lists every open `#session`
-action with a link to its page, and the daily digest shows them under "Needs a session". Open a Claude
+action with a link to its page, and Your day ahead shows them under "Needs a session". Open a Claude
 Code session, ask it to work that list, and it reports back with a note in `inbox/` that the next run
 files like any capture.
 
