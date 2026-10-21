@@ -20,7 +20,7 @@ edit it when something changes. Keep it free of secrets: it is committed to the 
 - Log channel: `#flux-log` (muted; run summaries, run links, "note received" notices)
 - Optional channels, each named in the server's `flux.toml` (`[discord]`); delete the lines you do not use.
   Without one, its posts stay in the capture channel. What you write in them is read like a post in `#flux`.
-  - Digest channel: `#flux-digest` (Your day ahead and Your week ahead)
+  - Briefings channel: `#flux-day-ahead` (Your day ahead and Your week ahead; worth leaving unmuted, it posts once a morning and once on Sunday)
   - Actions channel: `#flux-actions` (posts that wait for a tap: email triage, Drive folder suggestions)
   - Voice channel: `#voice-notes` (voicemail notices)
 - Your Discord user id: set on the server side, not here (the relay @mentions you on questions)

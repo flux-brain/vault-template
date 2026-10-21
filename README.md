@@ -120,7 +120,7 @@ can watch Claude work.
   in two to three minutes; the hourly run is the backstop.
 - **Answers and drafts** arrive in `notify/` and are posted to `#flux`, ready to copy. **Questions**
   from Claude @mention you. Answer by replying in the channel; the answer comes back through the inbox.
-- **Briefings:** Your day ahead every morning and, on Sundays, Your week ahead, posted to `#flux-digest`.
+- **Briefings:** Your day ahead every morning and, on Sundays, Your week ahead, posted to `#flux-day-ahead`.
 - **More channels, if you want them:** the digests, the posts that wait for a tap and the voicemail
   notices can each have a channel of their own, so `#flux` keeps only your captures and Claude's
   answers and questions. Name them in `flux.toml`; until a channel exists its posts stay in `#flux`.
