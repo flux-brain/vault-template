@@ -45,7 +45,7 @@ written to manipulate an AI. Flux is built so that such a message has nothing to
   make no judgement calls.
 - **Acting outside needs you in the room.** Anything beyond the vault (sending, changing files in your cloud
   storage, browsing) happens only in an interactive session that you are attending, and only once you say yes.
-- **Least privilege.** Drive and Calendar access is read-only. The only email Flux sends on its own is the
+- **Least privilege.** Calendar access is read-only; Drive access covers only the files Flux itself stores, plus read-only access when you turn on link lookup or folder watching. The only email Flux sends on its own is the
   weekly briefing, when you turn it on, and only to your own address, read from the account rather than from
   settings or vault content.
 
