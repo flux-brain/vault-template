@@ -1,9 +1,12 @@
 # Flux vault template
 
-The memory half of **Flux**, a personal AI assistant built on a second-brain structure: an Obsidian
+The memory half of **Flux**, a personal AI assistant built on a second-brain structure and designed
+security first: anything goes in, but nothing goes out without you. It is an Obsidian
 vault that Claude maintains for you using the LLM Wiki pattern. You capture; Claude files, links,
 summarises, drafts, reviews and asks you questions. You read the result in Obsidian on your phone or
-laptop and talk to it through a Discord channel.
+laptop and talk to it through a Discord channel. With the Google Tasks module, each project's open actions
+are also a Tasks list you can tick and edit on your phone; an open-items Google Sheet, where you see every
+open item and can type an instruction on a row, is coming.
 
 This repository is a **template**: press "Use this template" on GitHub to get your own private copy.
 It contains the rules Claude follows (`CLAUDE.md`), the folder layout, the page template and the
@@ -27,6 +30,24 @@ The analyst who reads all the incoming mail is deliberately the one who cannot a
 letter can say "wire the money", but the person reading it has no access to the bank. This is
 separation of duties, the control a finance team uses: whoever opens the post does not sign the
 cheques.
+
+### Security model
+
+An assistant that reads your mail is exposed to every message anyone sends you, including forged ones
+written to manipulate an AI. Flux is built so that such a message has nothing to reach:
+
+- **The reader cannot act.** The routines that read incoming material see only the vault repository, with
+  no internet, no email, no connectors and no payment means.
+- **Incoming content is data, never instructions.** Emails, attachments, calendar entries and captures are
+  filed and summarised; requests written inside them are never followed, and the filing routine never opens
+  their links.
+- **The couriers do not think.** The server programs that carry things in and out run fixed procedures and
+  make no judgement calls.
+- **Acting outside needs you in the room.** Anything beyond the vault (sending, changing files in your cloud
+  storage, browsing) happens only in an interactive session that you are attending, and only once you say yes.
+- **Least privilege.** Drive and Calendar access is read-only. The only email Flux sends on its own is the
+  weekly briefing, when you turn it on, and only to your own address, read from the account rather than from
+  settings or vault content.
 
 ## Architecture
 
