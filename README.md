@@ -4,7 +4,9 @@ The memory half of **Flux**, a personal AI assistant built on a second-brain str
 security first: anything goes in, but nothing goes out without you. It is an Obsidian
 vault that Claude maintains for you using the LLM Wiki pattern. You capture; Claude files, links,
 summarises, drafts, reviews and asks you questions. You read the result in Obsidian on your phone or
-laptop and talk to it through a Discord channel.
+laptop and talk to it through a Discord channel. With the Google Tasks module, each project's open actions
+are also a Tasks list you can tick and edit on your phone; an open-items Google Sheet, where you see every
+open item and can type an instruction on a row, is coming.
 
 This repository is a **template**: press "Use this template" on GitHub to get your own private copy.
 It contains the rules Claude follows (`CLAUDE.md`), the folder layout, the page template and the
