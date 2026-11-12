@@ -77,6 +77,7 @@ from a chat kept, they write it themselves in the capture channel or on a page.
 | `calendar/YYYY-MM-DD.md` | server Calendar module, READ-ONLY, optional | One file per day, today and the week ahead; a day that has ended stays as it stood. Read it, never edit, move or delete it |
 | `tasks/links.md` | server Tasks module, READ-ONLY, optional | One line per open action with a block id: its Google Tasks link, for the briefings' `[Task]` links. Read it, never edit, move or delete it |
 | `followups/waiting.md` | server follow-up module, READ-ONLY | the owner's sent emails still waiting for an answer, oldest first (recipients, subject, Gmail link). Read it, never edit it |
+| `openloops/replies/<ID>.md` | Claude writes, server reads and deletes, optional | Your answer to an instruction typed in the open-items Sheet (see `ops/sheet.md`) |
 | `memory/` | server mirror, READ-ONLY, optional | The owner's memory store (see above) |
 | `memory-proposals/` | Claude writes, server reads, optional | Proposed memory updates from the owner's own page edits (see "Keeping pages and memory in step") |
 | `wiki/projects/` | Claude | One page per project, with status and next actions |
@@ -251,7 +252,7 @@ changed within the last hour, leave it alone: the owner may still be typing on t
 non-empty captures ("test", "new note") are NOT empty; file them normally.
 
 **Kinds with their own instructions.** Before filing a capture of one of these kinds, read its file
-once per run: `source: tasks` -> `ops/tasks.md`; `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`; `source: drive` -> `ops/drive.md`; `source: triage` -> `ops/gmail.md` (last section);
+once per run: `source: tasks` -> `ops/tasks.md`; `source: keep` -> `ops/keep.md`; `source: gmail` -> `ops/gmail.md`; `source: drive` -> `ops/drive.md`; `source: triage` -> `ops/gmail.md` (last section); `source: sheet` -> `ops/sheet.md`;
 `source: memory` -> `ops/memory-reconcile.md` (each exists only when its module is on). Discord captures (they carry
 `message_id:`) and Obsidian notes (no `source:`) need only this section.
 
@@ -360,7 +361,7 @@ uses it in both directions:
 **Captures from the memory store (`source: memory`, `kind: reconcile`)** are filed by the rules in
 `ops/memory-reconcile.md`. **Never write a memory proposal for changes made from these captures.**
 
-**Proposing memory updates (`memory-proposals/`).** When a capture from the owner (`source: tasks` or `source: keep`, a
+**Proposing memory updates (`memory-proposals/`).** When a capture from the owner (`source: tasks`, `source: keep` or `source: sheet`, a
 Discord capture, or an Obsidian note with no `source:`) changes an action on a page whose `memory:` list
 is not empty (ticks, reopens, adds, removes or rewords it), ALSO write ONE file per page per run,
 `memory-proposals/YYYY-MM-DDTHHMM-<slug>.md` (real current UTC time), containing only this frontmatter:
@@ -368,7 +369,7 @@ is not empty (ticks, reopens, adds, removes or rewords it), ALSO write ONE file 
 ```yaml
 ---
 page: <slug>
-source: tasks | keep | discord | obsidian
+source: tasks | keep | sheet | discord | obsidian
 capture: raw/captures/YYYY/MM/<capture file>
 memory: [<the page's memory: list>]
 changes:
